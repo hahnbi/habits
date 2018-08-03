@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@types/react-router-dom": "^4.3.0",
+    "js-joda": "^1.8.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
@@ -22,6 +23,6 @@
     "@types/node": "^10.5.5",
     "@types/react": "^16.4.7",
     "@types/react-dom": "^16.0.6",
-    "typescript": "^3.0.1"
+    "typescript": "2.9.2"
   }
 }
