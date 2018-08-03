@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 import Login from 'src/components/access/login';
 import Dashboard from 'src/components/dashboard/dashboard';
+import pathBuilder from 'src/utilities/path_builder';
 
 class App extends React.Component {
   public render() {
@@ -13,13 +14,13 @@ class App extends React.Component {
       <BrowserRouter>
         <div>
           <ul>
-            <li><Link to="/">Log in</Link></li>
-            <li><Link to="/habits">Habits</Link></li>
+            <li><Link to={pathBuilder.buildPath('homepage')}>Log in</Link></li>
+            <li><Link to={pathBuilder.buildPath('dashboard')}>Habits</Link></li>
           </ul>
 
           <hr/>
-          <Route exact={true} path="/" component={Login} />
-          <Route exact={true} path="/habits" component={Dashboard} />
+          <Route exact={true} path={pathBuilder.buildPath('homepage')} component={Login} />
+          <Route exact={true} path={pathBuilder.buildPath('dashboard')} component={Dashboard} />
         </div>
       </BrowserRouter>
     );
