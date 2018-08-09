@@ -5,15 +5,15 @@ const sliceMap = {
   ui,
 };
 
-export interface IInitialState {
+export interface IState {
   ui: ui.IState,
 }
 
-export function getInitialState(): IInitialState {
+export function getInitialState(): IState {
   return Object.keys(sliceMap).reduce((state, sliceKey) => {
     state[sliceKey] = sliceMap[sliceKey].getInitialState();
     return state;
-  }, {} as IInitialState);
+  }, {} as IState);
 }
 
 const reducerMap = Object.keys(sliceMap).reduce((reducers, sliceKey) => {
