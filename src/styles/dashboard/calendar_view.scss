@@ -1,0 +1,23 @@
+.calendar-view-component {
+  &-container {
+    position: relative;
+  }
+
+  &-date {
+    $calendar-view-component-date-size: 2.5rem;
+
+    border-radius: $border-radius;
+    background-color: $gray-200;
+    color: $gray-700;
+    font-weight: $font-weight-bold;
+    width: $calendar-view-component-date-size;
+    height: $calendar-view-component-date-size;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    &:not(:last-of-type) {
+      margin-right: 0.5rem;
+    }
+  }
+}

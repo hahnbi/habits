@@ -1,18 +1,35 @@
+import { YearMonth } from 'js-joda';
 import * as React from 'react';
+import Namespace from 'src/utilities/namespacer';
 
-class CalendarView extends React.Component {
+interface IProps {
+  date: number;
+  month: number;
+  year: number;
+}
+
+const namespace = new Namespace('calendar-view-component');
+
+class CalendarView extends React.Component<IProps> {
+  public getDaysInYearMonth() {
+    const yearMonth = YearMonth.of(this.props.year, this.props.month);
+    return yearMonth.lengthOfMonth();
+  }
+
   public render() {
     return (
-      <div>
+      <div className={namespace.name('container')}>
         {this.renderRows()}
       </div>
     );
   }
 
   public renderRows = () => {
-    return [1, 2, 3].map(day => {
+    const daysInYearMonth = this.getDaysInYearMonth();
+
+    return Array.from(Array(daysInYearMonth)).map((_, idx) => {
       return (
-        <div key={day} className="badge badge-primary">{day}</div>
+        <div key={idx} className={namespace.name('date')}>{idx + 1}</div>
       );
     })
   }
