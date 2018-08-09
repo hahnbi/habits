@@ -5,8 +5,8 @@ import {
   Link,
   Route,
 } from 'react-router-dom'
-import Login from 'src/components/access/login';
-import Dashboard from 'src/components/dashboard/dashboard';
+import Login from 'src/access/components/login';
+import Dashboard from 'src/dashboard/components/dashboard';
 import store from 'src/store/store_provider';
 import pathBuilder from 'src/utilities/path_builder';
 
