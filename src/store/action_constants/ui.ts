@@ -1,2 +1,2 @@
-export const UPDATE_YEAR = 'uiUpdateYear';
-export const UPDATE_MONTH = 'uiUpdateMonth';
+export const UPDATE_YEAR_MONTH = 'ui/UPDATE_YEAR_MONTH';
+export const UPDATE_DATE = 'ui/UPDATE_DATE';

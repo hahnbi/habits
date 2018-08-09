@@ -1,5 +1,6 @@
 import { LocalDate } from 'js-joda';
-import uiActions from 'src/store/actions/ui';
+import * as actionConstants from 'src/store/action_constants/ui';
+import Actions from 'src/store/actions/ui';
 
 export interface IState {
   date: number;
@@ -17,10 +18,23 @@ export function getInitialState(): IState {
   }
 }
 
-export function reducer(state: IState = getInitialState(), action: uiActions): IState {
-  const { type } = action;
-
-  switch (type) {
+export function reducer(state: IState = getInitialState(), action: Actions): IState {
+  switch (action.type) {
+    case actionConstants.UPDATE_YEAR_MONTH: {
+      const { payload } = action;
+      return {
+        ...state,
+        month: payload.month,
+        year: payload.year,
+      };
+    }
+    case actionConstants.UPDATE_DATE: {
+      const { payload: date } = action;
+      return {
+        ...state,
+        date,
+      };
+    }
     default:
       return state;
   }
