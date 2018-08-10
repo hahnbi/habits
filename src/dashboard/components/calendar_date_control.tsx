@@ -1,4 +1,4 @@
-import { Month, Year } from 'js-joda';
+import { Month, Year, YearMonth } from 'js-joda';
 import React from 'react';
 import uiActions from 'src/store/actions/ui';
 
@@ -47,6 +47,18 @@ class CalendarDateControl extends React.Component<Props> {
     this.props.updateYearMonth(year, this.props.month);
   }
 
+  public handleIncrementMonthYear = () => {
+    const yearMonth = YearMonth.of(this.props.year, this.props.month);
+    const nextYearMonth = yearMonth.plusMonths(1);
+    this.props.updateYearMonth(nextYearMonth.year(), nextYearMonth.month().value());
+  }
+
+  public handleDecrementMonthYear = () => {
+    const yearMonth = YearMonth.of(this.props.year, this.props.month);
+    const nextYearMonth = yearMonth.minusMonths(1);
+    this.props.updateYearMonth(nextYearMonth.year(), nextYearMonth.month().value());
+  }
+
   public getMonths() {
     return Month.values().map(month => {
       return {
@@ -63,12 +75,26 @@ class CalendarDateControl extends React.Component<Props> {
 
   public render() {
     return (
-      <div className="form-row">
+      <div className="form-row align-items-center">
+        <div className="form-group">
+          <button className="btn btn-link"
+            onClick={this.handleDecrementMonthYear}
+          >
+            <i className="fas fa-caret-left icon-h3" />
+          </button>
+        </div>
         <div className="form-group col-md-4">
           {this.renderMonths()}
         </div>
         <div className="form-group col-md-1">
           {this.renderYears()}
+        </div>
+        <div className="form-group">
+          <button className="btn btn-link"
+            onClick={this.handleIncrementMonthYear}
+          >
+            <i className="fas fa-caret-right icon-h3" />
+          </button>
         </div>
       </div>
     )
