@@ -1,5 +1,5 @@
 //tslint:disable
-import db from 'src/app_init/firebase';
+import db from 'src/app_init/firestore';
 
 const UserService = {
   addUser() {
