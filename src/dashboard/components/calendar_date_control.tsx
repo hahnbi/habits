@@ -77,11 +77,7 @@ class CalendarDateControl extends React.Component<Props> {
     return (
       <div className="form-row align-items-center">
         <div className="form-group">
-          <button className="btn btn-link"
-            onClick={this.handleDecrementMonthYear}
-          >
-            <i className="fas fa-caret-left icon-h3" />
-          </button>
+          {this.renderDecrementMonthYearControl()}
         </div>
         <div className="form-group col-md-4">
           {this.renderMonths()}
@@ -90,11 +86,7 @@ class CalendarDateControl extends React.Component<Props> {
           {this.renderYears()}
         </div>
         <div className="form-group">
-          <button className="btn btn-link"
-            onClick={this.handleIncrementMonthYear}
-          >
-            <i className="fas fa-caret-right icon-h3" />
-          </button>
+          {this.renderIncrementMonthYearControl()}
         </div>
       </div>
     )
@@ -138,6 +130,30 @@ class CalendarDateControl extends React.Component<Props> {
         <option key={year} value={year}>{year}</option>
       );
     });
+  }
+
+  public renderDecrementMonthYearControl = () => {
+    return (
+      <button className="btn btn-link"
+        onClick={this.handleDecrementMonthYear}
+      >
+        <i className="fas fa-caret-left icon-h3" />
+      </button>
+    )
+  }
+
+  public renderIncrementMonthYearControl = () => {
+    const nowYearMonth = YearMonth.now();
+    const isDisabled = nowYearMonth.equals(YearMonth.of(this.props.year, this.props.month));
+
+    return (
+      <button className="btn btn-link"
+        onClick={this.handleIncrementMonthYear}
+        disabled={isDisabled}
+      >
+        <i className="fas fa-caret-right icon-h3" />
+      </button>
+    )
   }
 }
 
