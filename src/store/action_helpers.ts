@@ -1,3 +1,5 @@
+import { FunctionType, IMapObject } from 'src/interfaces/common';
+
 export interface IAction<T extends string> {
   type: T;
 }
@@ -12,6 +14,4 @@ export function createAction<T extends string, P>(type: T, payload?: P) {
   return payload === undefined ? { type } : { type, payload };
 }
 
-type FunctionType = (...args: any[]) => any;
-interface IActionCreatorsMapObject { [actionCreator: string]: FunctionType }
-export type ActionsUnion<A extends IActionCreatorsMapObject> = ReturnType<A[keyof A]>
+export type ActionsUnion<A extends IMapObject<FunctionType>> = ReturnType<A[keyof A]>

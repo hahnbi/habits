@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import Login from 'src/access/components/login';
 import userActions from 'src/store/actions/user';
-import * as rootSlice from 'src/store/root_slice';
+import { IGlobalState } from 'src/store/root_slice';
 
-function mapStateToProps(state: rootSlice.IState) {
+function mapStateToProps(state: IGlobalState) {
   return {
     user: state.user.user,
   };
