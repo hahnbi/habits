@@ -1,4 +1,4 @@
-import { FunctionType, IMapObject } from 'src/interfaces/common';
+import { FunctionType, IMapObject } from 'src/types/common';
 
 export interface IAction<T extends string> {
   type: T;

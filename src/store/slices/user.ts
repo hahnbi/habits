@@ -1,7 +1,7 @@
-import { IMapObject } from 'src/interfaces/common';
-import { IUser } from 'src/interfaces/user';
 import * as actionConstants from 'src/store/action_constants/user';
 import Actions from 'src/store/actions/user';
+import { IMapObject } from 'src/types/common';
+import { IUser } from 'src/types/user';
 
 export interface IState {
   user: IUser | null;

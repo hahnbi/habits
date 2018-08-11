@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import { IMapObject } from 'src/interfaces/common';
 import * as ui from 'src/store/slices/ui';
 import * as user from 'src/store/slices/user';
+import { IMapObject } from 'src/types/common';
 
 const sliceMap = {
   ui,

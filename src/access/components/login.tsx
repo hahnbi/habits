@@ -4,7 +4,7 @@ import FirebaseAuth from 'react-firebaseui/FirebaseAuth';
 import { Redirect } from 'react-router-dom';
 import { AnyAction } from 'redux';
 import firebase from 'src/app_init/firebase';
-import { IUser } from 'src/interfaces/user';
+import { IUser } from 'src/types/user';
 import pathBuilder from 'src/utilities/path_builder';
 
 interface IPropsFromState {
