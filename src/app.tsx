@@ -5,7 +5,7 @@ import {
   Link,
   Route,
 } from 'react-router-dom'
-import Login from 'src/access/components/login';
+import LoginWrapper from 'src/access/components/login_wrapper';
 import Dashboard from 'src/dashboard/components/dashboard';
 import store from 'src/store/store_provider';
 import pathBuilder from 'src/utilities/path_builder';
@@ -22,7 +22,7 @@ class App extends React.Component {
             </ul>
 
             <hr/>
-            <Route exact={true} path={pathBuilder.buildPath('homepage')} component={Login} />
+            <Route exact={true} path={pathBuilder.buildPath('homepage')} component={LoginWrapper} />
             <Route exact={true} path={pathBuilder.buildPath('dashboard')} component={Dashboard} />
           </div>
         </BrowserRouter>

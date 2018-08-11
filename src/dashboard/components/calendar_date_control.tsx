@@ -1,6 +1,6 @@
 import { Month, Year, YearMonth } from 'js-joda';
 import React from 'react';
-import uiActions from 'src/store/actions/ui';
+import { AnyAction } from 'redux';
 
 const START_YEAR = 2000;
 
@@ -10,7 +10,7 @@ interface IPropsFromState {
 }
 
 interface IPropsFromDispatch {
-  updateYearMonth(year: number, month: number): typeof uiActions.updateYearMonth
+  updateYearMonth(year: number, month: number): AnyAction;
 }
 
 type Props = IPropsFromState & IPropsFromDispatch

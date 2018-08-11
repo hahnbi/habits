@@ -2,18 +2,33 @@ import firebaseui from 'firebaseui';
 import * as React from 'react';
 import FirebaseAuth from 'react-firebaseui/FirebaseAuth';
 import { Redirect } from 'react-router-dom';
+import { AnyAction } from 'redux';
 import firebase from 'src/app_init/firebase';
+import { IUser } from 'src/interfaces/user';
 import pathBuilder from 'src/utilities/path_builder';
 
-class Login extends React.Component {
-  public state = {
-    loggedIn: false
-  };
+interface IPropsFromState {
+  user: IUser | null
+}
 
+interface IPropsFromDispatch {
+  clearUser(): AnyAction;
+  setUser(firebaseUser: firebase.User): AnyAction;
+}
+
+type Props = IPropsFromDispatch & IPropsFromState
+
+class Login extends React.Component<Props> {
   private uiConfig = {
     callbacks: {
-      signInSuccessWithAuthResult: (authResult: firebase.User) => {
-        this.handleSignInSuccess(authResult);
+      signInSuccessWithAuthResult: (authResult: firebase.auth.UserCredential) => {
+        const { user } = authResult;
+
+        if (user === null) {
+          throw new Error('Unable to sign in with user "null"');
+        }
+
+        this.handleSignInSuccess(user);
       },
     },
     credentialHelper: firebaseui.auth.CredentialHelper.NONE,
@@ -22,12 +37,8 @@ class Login extends React.Component {
     ],
   }
 
-  public handleSignInSuccess = (authResult: firebase.User) => {
-    // tslint:disable-next-line
-    console.log(authResult);
-    this.setState({
-      loggedIn: true
-    });
+  public handleSignInSuccess = (firebaseUser: firebase.User) => {
+    this.props.setUser(firebaseUser);
   }
 
   public render() {
@@ -39,7 +50,7 @@ class Login extends React.Component {
   }
 
   public renderLogin = () => {
-    if (this.state.loggedIn) {
+    if (this.props.user) {
       return (
         <Redirect to={pathBuilder.buildPath('dashboard')} />
       );
