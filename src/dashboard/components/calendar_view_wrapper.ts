@@ -7,7 +7,6 @@ function mapStateToProps(state: IGlobalState) {
     date: state.ui.date,
     month: state.ui.month,
     year: state.ui.year,
-
   };
 }
 

@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux';
 import * as ui from 'src/store/slices/ui';
 import * as user from 'src/store/slices/user';
-import { IMapObject } from 'src/types/common';
 
 const sliceMap = {
   ui,
   user,
 };
+
+type SliceKey = keyof typeof sliceMap;
 
 export interface IGlobalState {
   ui: ui.IState,
@@ -20,27 +21,28 @@ export function getInitialState(): IGlobalState {
   }, {} as IGlobalState);
 }
 
-const reducerMap = Object.keys(sliceMap).reduce((reducers, sliceKey) => {
-  reducers[sliceKey] = sliceMap[sliceKey].reducer;
-  return reducers;
-}, {});
-
+const reducerMap = {
+  ui: ui.reducer,
+  user: user.reducer,
+};
 export const reducer = combineReducers(reducerMap);
 
-type SelectorFunction = (globalState: IGlobalState, ...args: any[]) => any;
-type SelectorMap = IMapObject<SelectorFunction>
-type BoundSelectorMap = IMapObject<SelectorMap>
+type BoundSelectorFunctionType = (globalState: IGlobalState, ...args: any[]) => any;
+type BoundSelectorMap<T> = {
+  [P in keyof T]: BoundSelectorFunctionType;
+}
 
-export const selectors: BoundSelectorMap = Object.keys(sliceMap).reduce((boundSlices, sliceKey) => {
-  const sliceSelectors = sliceMap[sliceKey].selectors || {};
-
-  const boundSlice = Object.keys(sliceSelectors).reduce((boundSelectors, selectorKey) => {
+function bindSelectorsToLocalState<T, P extends SliceKey>(sliceSelectors: T, sliceKey: P): BoundSelectorMap<T> {
+  return Object.keys(sliceSelectors).reduce((boundSelectors, selectorKey) => {
     boundSelectors[selectorKey] = (globalState: IGlobalState, ...args: any[]) => {
-      return sliceSelectors[selectorKey](globalState[sliceKey], ...args)
-    }
+      return sliceSelectors[selectorKey](globalState[sliceKey])
+    };
     return boundSelectors;
-  }, {});
+  }, {} as BoundSelectorMap<T>)
+}
 
-  boundSlices[sliceKey] = boundSlice;
-  return boundSlices;
-}, {});
+export const selectors = {
+  ui: bindSelectorsToLocalState(ui.selectors, 'ui'),
+  user: bindSelectorsToLocalState(user.selectors, 'user'),
+}
+

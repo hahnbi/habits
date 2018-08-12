@@ -1,6 +1,5 @@
 import * as actionConstants from 'src/store/action_constants/user';
 import Actions from 'src/store/actions/user';
-import { IMapObject } from 'src/types/common';
 import { IUser } from 'src/types/user';
 
 export interface IState {
@@ -50,10 +49,8 @@ export function reducer(state: IState = getInitialState(), action: Actions): ISt
   }
 }
 
-type Selector = (localState: IState) => any;
-
-export const selectors: IMapObject<Selector> = {
-  isLoggedIn(localState): boolean {
+export const selectors = {
+  isLoggedIn(localState: IState) {
     return !!localState.user
   },
 }

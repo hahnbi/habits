@@ -39,3 +39,5 @@ export function reducer(state: IState = getInitialState(), action: Actions): ISt
       return state;
   }
 }
+
+export const selectors = {};
