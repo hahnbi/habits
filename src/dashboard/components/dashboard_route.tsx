@@ -2,7 +2,7 @@ import * as React from 'react';
 import CalendarDateControlWrapper from 'src/dashboard/components/calendar_date_control_wrapper';
 import CalendarViewWrapper from 'src/dashboard/components/calendar_view_wrapper';
 
-class Dashboard extends React.Component {
+class DashboardRoute extends React.Component {
   public render() {
     return (
       <div className="container-fluid">
@@ -13,4 +13,4 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+export default DashboardRoute;
