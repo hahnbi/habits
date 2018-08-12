@@ -4,11 +4,10 @@ import FirebaseAuth from 'react-firebaseui/FirebaseAuth';
 import { Redirect } from 'react-router-dom';
 import { AnyAction } from 'redux';
 import firebase from 'src/app_init/firebase';
-import { IUser } from 'src/types/user';
 import pathBuilder from 'src/utilities/path_builder';
 
 interface IPropsFromState {
-  user: IUser | null
+  isLoggedIn: boolean;
 }
 
 interface IPropsFromDispatch {
@@ -50,7 +49,7 @@ class Login extends React.Component<Props> {
   }
 
   public renderLogin = () => {
-    if (this.props.user) {
+    if (this.props.isLoggedIn) {
       return (
         <Redirect to={pathBuilder.buildPath('dashboard')} />
       );

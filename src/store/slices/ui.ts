@@ -40,4 +40,8 @@ export function reducer(state: IState = getInitialState(), action: Actions): ISt
   }
 }
 
-export const selectors = {};
+export const selectors = {
+  getDate: (localState: IState) => localState.date,
+  getMonth: (localState: IState) => localState.month,
+  getYear: (localState: IState) => localState.year,
+};
