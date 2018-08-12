@@ -4,6 +4,7 @@ import FirebaseAuth from 'react-firebaseui/FirebaseAuth';
 import { Redirect } from 'react-router-dom';
 import { AnyAction } from 'redux';
 import firebase from 'src/app_init/firebase';
+import { IUser } from 'src/types/user';
 import pathBuilder from 'src/utilities/path_builder';
 
 interface IPropsFromState {
@@ -12,7 +13,7 @@ interface IPropsFromState {
 
 interface IPropsFromDispatch {
   clearUser(): AnyAction;
-  setUser(firebaseUser: firebase.User): AnyAction;
+  setUser(firebaseUser: IUser): AnyAction;
 }
 
 type Props = IPropsFromDispatch & IPropsFromState
@@ -37,7 +38,26 @@ class Login extends React.Component<Props> {
   }
 
   public handleSignInSuccess = (firebaseUser: firebase.User) => {
-    this.props.setUser(firebaseUser);
+    const user = this.transformFirebaseUser(firebaseUser)
+    this.props.setUser(user);
+  }
+
+  public transformFirebaseUser = (firebaseUser: firebase.User): IUser => {
+    let createdAt: number;
+
+      if (typeof firebaseUser.metadata.creationTime === 'string') {
+        createdAt = Date.parse(firebaseUser.metadata.creationTime);
+      } else {
+        createdAt = 0;
+      }
+
+      return {
+        createdAt,
+        displayName: firebaseUser.displayName || '',
+        email: firebaseUser.email || '',
+        emailVerified: firebaseUser.emailVerified,
+        uid: firebaseUser.uid,
+      };
   }
 
   public render() {

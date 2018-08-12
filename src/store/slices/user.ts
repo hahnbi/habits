@@ -17,25 +17,9 @@ export function reducer(state: IState = getInitialState(), action: Actions): ISt
     case actionConstants.SET_USER: {
       const { payload: user } = action;
 
-      let createdAt: number;
-
-      if (typeof user.metadata.creationTime === 'string') {
-        createdAt = Date.parse(user.metadata.creationTime);
-      } else {
-        createdAt = 0;
-      }
-
-      const newUser = {
-        createdAt,
-        displayName: user.displayName || '',
-        email: user.email || '',
-        emailVerified: user.emailVerified,
-        uid: user.uid,
-      };
-
       return {
         ...state,
-        user: newUser,
+        user,
       };
     }
     case actionConstants.CLEAR_USER: {

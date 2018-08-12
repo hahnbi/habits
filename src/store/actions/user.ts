@@ -1,9 +1,9 @@
-import { User } from 'firebase';
 import * as actionConstants from 'src/store/action_constants/user';
 import { ActionsUnion, createAction } from 'src/store/action_helpers';
+import { IUser } from 'src/types/user';
 
 const actions = {
-  setUser: (firebaseUser: User) => createAction(actionConstants.SET_USER, firebaseUser),
+  setUser: (user: IUser) => createAction(actionConstants.SET_USER, user),
 
   clearUser: () => createAction(actionConstants.CLEAR_USER),
 }
